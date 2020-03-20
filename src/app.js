@@ -1,29 +1,40 @@
-const path = require('path')
+const path = require('path')//-> path is a native node module
 const express = require('express')
 const hbs = require('hbs')
 const geocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
 
+//setup express.js
 const app = express()
 
-//dynamic port
+//dynamic port based on environment setting
 const port = process.env.PORT || 3000
 
 //Define paths for Express config
+//path join joins the path to both variables input
+//__dirname gets the current directory of whichever file you are in.
+//in this case, __dirname gets us to the /src directory but we need to go out a folder into public so we use ../public to get into that folder.
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
 
 //Setup handlebars and views location.
-app.set('view engine', 'hbs')
+app.set('view engine', 'hbs') //this renders .hbs files when res.render is called
+//setting up view path for express.js-> these are the pages for each link in the website.
 app.set('views', viewsPath)
-hbs.registerPartials(partialsPath)
+//This registers the partials so they can be used in our views
+hbs.registerPartials(partialsPath) //register partials 
 
 
 //Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
-//start page render
+//start page render-> we set the initial page to have no extension on the url so 
+//if the user visits the home page, they are ready to interact with the UI
+//the callback is called once the url matches the string value of the get method
+//this responds with a req or res variable which stand for request vs response
+//if there is a req-> this represents an HTTP request
+//res-> reprensets an HTTP response
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
