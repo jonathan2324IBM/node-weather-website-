@@ -50,7 +50,7 @@ app.get('/help', (req, res) => {
 
 //weather page render
 app.get('/weather', (req, res) => {
-
+    //if the user does not input an addrss, send an error message.
     if(!req.query.address) {
         return res.send({
             error: 'You must provide an address to search.'
@@ -73,7 +73,7 @@ app.get('/weather', (req, res) => {
                         error: error
                     })
                 }
-                //this is the data being sent to client side
+                //this is the json data being sent to client side when we visit /weather?address=someaddress
                 res.send({
                     currentTemp: forecastData.currentTemp,
                     forecast: forecastData.dailyData.summary,
