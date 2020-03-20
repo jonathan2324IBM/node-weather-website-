@@ -24,7 +24,8 @@ weatherForm.addEventListener('submit', (e) => {
             } else {
                 messageOne.textContent = data.location
                 messageTwo.textContent = `In ${data.location}, the forecast shows ${data.forecast.toLowerCase()} The high temperature is 
-                ${data.tempHigh} degrees and the low temperature is ${data.tempLow} degrees. The current temperature is ${data.currentTemp} degress.`
+                ${data.tempHigh} degrees and the low temperature is ${data.tempLow} degrees. The current temperature is ${data.currentTemp} degress with
+                 a ${data.rainProb}% chance of rain.`
             }
         
         })
