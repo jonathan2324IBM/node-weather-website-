@@ -14,6 +14,8 @@ weatherForm.addEventListener('submit', (e) => {
     messageOne.textContent = 'Loading...'
     messageTwo.textContent = ''
 
+    //the response is the json from the back end api that was fetched. from app.js in src. 
+    //
     fetch(`/weather?address=${location}`).then((response) => {
         response.json().then((data) => {
             if(data.error){
@@ -21,7 +23,8 @@ weatherForm.addEventListener('submit', (e) => {
                 
             } else {
                 messageOne.textContent = data.location
-                messageTwo.textContent = data.forecast
+                messageTwo.textContent = `In ${data.location}, the forecast shows ${data.forecast.toLowerCase()} The high temperature is 
+                ${data.tempHigh} degrees and the low temperature is ${data.tempLow} degrees. The current temperature is ${data.currentTemp} degress.`
             }
         
         })

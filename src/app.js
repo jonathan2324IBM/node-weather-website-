@@ -67,14 +67,19 @@ app.get('/weather', (req, res) => {
                 })
             }
         
-            forecast(longitude, latitude, (error, forecaseData) => {
+            forecast(longitude, latitude, (error, forecastData) => {
                 if(error) {
                     return res.send({
                         error: error
                     })
                 }
+                //this is the data being sent to client side
                 res.send({
-                    forecast: forecaseData.dailyData,
+                    currentTemp: forecastData.currentTemp,
+                    forecast: forecastData.dailyData.summary,
+                    icon: forecastData.dailyData.icon,
+                    tempLow: forecastData.dailyData.temperatureLow,
+                    tempHigh: forecastData.dailyData.temperatureHigh,
                     location: location,
                     address: req.query.address
                 })
